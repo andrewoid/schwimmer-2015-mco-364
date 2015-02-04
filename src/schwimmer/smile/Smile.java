@@ -24,8 +24,25 @@ public class Smile extends JFrame {
 	}
 	
 	public static void main(String args[]) {
-		new Smile().setVisible(true);
+		final Smile smile = new Smile();
+		smile.setVisible(true);
+		
+		
+		Thread t = new Thread() {
+			public void run() {
+				while (true) {
+					smile.repaint();
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		
+		t.start();
+		
 	}
-	
 	
 }
