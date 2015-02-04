@@ -10,7 +10,9 @@ public class SmileComponent extends JComponent {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.drawOval(200, 100, 50, 400);
+		g.drawOval(200, 200, 50, 50);
+		
+		g.drawOval(400, 200, 50, 50);
 		
 		
 	}
