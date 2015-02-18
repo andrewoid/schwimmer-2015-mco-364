@@ -17,7 +17,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 		
-		SnakeComponent comp = new SnakeComponent();
+		WorldComponent comp = new WorldComponent();
 		comp.addKeyListener(this);
 		comp.setFocusable(true);
 		
