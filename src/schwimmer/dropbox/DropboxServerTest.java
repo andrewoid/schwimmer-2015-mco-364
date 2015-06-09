@@ -15,10 +15,8 @@ import org.junit.Test;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
-public class DropboxServerTest implements MessagePatterns {
+public class DropboxServerTest implements MessagePatterns, Constants {
 	
-	private static final String HOSTNAME = "localhost";
-	private static final int PORT = 8080;
 	private Socket socket;
 	private PrintWriter writer;
 	private BufferedReader reader;
@@ -153,6 +151,19 @@ public class DropboxServerTest implements MessagePatterns {
 		}
 
 		assetExistsInList(filename, lastModified, filesize);
+	}
+	
+	@Test
+	public void testSyncMessage() throws IOException {
+		givenServerConnection();
+		
+		Socket anotherSocket = new Socket(HOSTNAME, PORT);
+		BufferedReader anotherReader = new BufferedReader( new InputStreamReader(socket.getInputStream()) );
+		
+		thenFileUploadsSuccessfully("Hi");
+		
+		String line = anotherReader.readLine();
+		Assert.assertTrue(line + " is not a SYNC message", SYNC.matcher(line).matches());
 	}
 	
 	
